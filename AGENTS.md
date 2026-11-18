@@ -2,7 +2,7 @@
 
 # AGENTS.md
 
-`jspassgen-sdk-java` is the planned native Java port of jspassgen's
+`jspassgen-sdk-java` is the native Java port of jspassgen's
 core (`packages/core` in
 [jspassgen](https://github.com/sebastienrousseau/jspassgen)): the same
 password types, validation, entropy and error codes, generated inside

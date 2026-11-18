@@ -4,12 +4,12 @@
 
 ## Supported versions
 
-Nothing is released yet. Once releases start, while pre-1.0, the latest
-released `0.0.x` receives security fixes; older `0.0.x` versions do not.
+While pre-1.0, the latest released `0.0.x` receives security fixes;
+older `0.0.x` versions do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| 0.0.22 | In development, unreleased | Yes, on the release branch |
+| 0.0.22 | Latest release | Yes |
 
 ## Reporting a vulnerability
 

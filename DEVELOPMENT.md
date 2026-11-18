@@ -55,8 +55,8 @@ maintained Java tool in the build and is not measured.
   `main`.
 
 `.github/workflows/release.yml` releases a pushed `v<version>` tag to
-Maven Central. Nothing has been released yet; the first release is the
-suite's first lockstep version, 0.0.22.
+Maven Central. The first release is the suite's first lockstep version,
+0.0.22.
 
 1. On `feat/v<version>`: move the version in `pom.xml` and its
    restatements, and date the `CHANGELOG.md` heading. Merge the release

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
 /**
- * A planned native Java port of the jspassgen core.
+ * A native Java port of the jspassgen core.
  *
  * <p>This version holds only the random port that every generator will
  * draw from: {@link com.jspassgen.RandomSource} and its

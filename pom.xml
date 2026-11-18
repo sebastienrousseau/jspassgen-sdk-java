@@ -5,16 +5,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- Proposed coordinates. The com.jspassgen namespace needs DNS
-       verification of jspassgen.com at Sonatype Central before anything
-       can be published under it; nothing is published yet. -->
+  <!-- Maven Central coordinates. Publishing under the com.jspassgen
+       namespace needs DNS verification of jspassgen.com at Sonatype
+       Central. -->
   <groupId>com.jspassgen</groupId>
   <artifactId>jspassgen</artifactId>
   <version>0.0.22</version>
   <packaging>jar</packaging>
 
   <name>jspassgen</name>
-  <description>A planned native Java port of the jspassgen password and passphrase core, drawing randomness only from SecureRandom.</description>
+  <description>A native Java port of the jspassgen password and passphrase core, drawing randomness only from SecureRandom.</description>
   <url>https://github.com/sebastienrousseau/jspassgen-sdk-java</url>
 
   <licenses>
