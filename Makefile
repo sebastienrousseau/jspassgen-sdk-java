@@ -9,15 +9,19 @@
 # ./mvnw pins Maven 3.10.1 (SHA-256 checked) and .mvn/maven.config makes
 # Maven refuse any artifact whose SHA-256 is not recorded in
 # .mvn/checksums/. After a dependency or plugin change, `make lock`
-# re-records them from a clean local repository; review the diff.
+# re-records them from a clean local repository, the release profile
+# included; review the diff.
 
 MVN ?= ./mvnw
 OSV_SCANNER ?= osv-scanner
 LOCK_REPO ?= /tmp/jspassgen-sdk-java-lock-repo
 TC := -Daether.artifactResolver.postProcessor.trustedChecksums
 JAVA_FILES := $(shell find src -name '*.java' | LC_ALL=C sort)
+# A release build that uploads nothing: the Central bundle is built in
+# target/central-publishing/ with placeholder credentials.
+DRY_RUN_FLAGS := -Dcentral.skipUpload=true -Dcentral.ignorePublished=false -s ci/dry-run-settings.xml
 
-.PHONY: help check versions format-check size verify build test lint javadoc docs-lint lock sbom audit clean
+.PHONY: help check versions format-check size verify build test lint javadoc docs-lint release-dry-run lock sbom audit clean
 
 help: ## List the targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | sed 's/:.*## /: /'
@@ -67,10 +71,18 @@ docs-lint: ## markdownlint, codespell, REUSE and lychee (offline) over the docs
 	reuse lint
 	lychee --offline --no-progress --include-fragments --exclude-path target '**/*.md'
 
-lock: ## Re-record .mvn/checksums from a clean local repository
+release-dry-run: ## The release build (jar, sources and Javadoc jars, Central bundle), signed with GPG_KEYNAME if set, not published
+	$(MVN) -B -Prelease deploy $(DRY_RUN_FLAGS) \
+	  $(if $(GPG_KEYNAME),-Dgpg.keyname=$(GPG_KEYNAME),-Dgpg.skip=true)
+
+lock: ## Re-record .mvn/checksums from a clean local repository, release profile included
 	rm -rf .mvn/checksums $(LOCK_REPO)
-	$(MVN) -B -q -Dmaven.repo.local=$(LOCK_REPO) $(TC).record=true \
-	  clean install pmd:check cyclonedx:makeBom javadoc:javadoc -DoutputFormat=json -DincludeTestScope=true
+	$(MVN) -B -q -Dmaven.repo.local=$(LOCK_REPO) $(TC).record=true -Prelease \
+	  clean deploy pmd:check cyclonedx:makeBom javadoc:javadoc -DoutputFormat=json -DincludeTestScope=true \
+	  -Dgpg.skip=true $(DRY_RUN_FLAGS)
+	# The deploy records this project's own POM, which is built here, not
+	# downloaded; keep only the third-party checksums.
+	rm -f .mvn/checksums/checksums-workspace.sha256
 	rm -rf $(LOCK_REPO)
 
 sbom: ## CycloneDX SBOM of the resolved dependencies (target/bom.json)

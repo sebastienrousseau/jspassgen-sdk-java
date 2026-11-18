@@ -7,12 +7,12 @@
 <h1 align="center">jspassgen-sdk-java</h1>
 
 <p align="center">
-  The planned native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.22 holds the random source, and the generators are not ported yet.
+  A native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.22 holds the random source, and the generators are not ported yet.
 </p>
 
 <p align="center">
   <a href="https://github.com/sebastienrousseau/jspassgen-sdk-java/actions"><img src="https://img.shields.io/github/actions/workflow/status/sebastienrousseau/jspassgen-sdk-java/ci.yml?style=for-the-badge&logo=github" alt="Build" height="28" /></a>
-  <a href="docs/POLICIES.md#publication"><img src="https://img.shields.io/badge/maven%20central-not%20published%20yet-lightgrey?style=for-the-badge&color=fc8d62&logo=apachemaven" alt="Maven Central: not published yet" height="28" /></a>
+  <a href="https://central.sonatype.com/artifact/com.jspassgen/jspassgen"><img src="https://img.shields.io/maven-central/v/com.jspassgen/jspassgen?style=for-the-badge&color=fc8d62&logo=apachemaven" alt="Maven Central version" height="28" /></a>
   <a href="DEVELOPMENT.md"><img src="https://img.shields.io/badge/docs-javadoc%20(local)-blue?style=for-the-badge&labelColor=555555&logo=readthedocs" alt="Docs" height="28" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/sebastienrousseau/jspassgen-sdk-java"><img src="https://img.shields.io/ossf-scorecard/github.com/sebastienrousseau/jspassgen-sdk-java?style=for-the-badge&label=OpenSSF%20Scorecard&logo=openssf" alt="OpenSSF Scorecard" height="28" /></a>
   <a href="LICENSE-APACHE"><img src="https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg?style=for-the-badge" alt="License: Apache-2.0 OR MIT" height="28" /></a>
@@ -25,7 +25,7 @@
 
 **Getting started**
 
-- [Install](#install): build from a checkout into your local Maven repository; not on Maven Central yet
+- [Install](#install): the Maven Central dependency
 - [Requirements](#requirements): Java floor, build toolchain, platforms
 - [Quick Start](#quick-start): draw random bytes and unbiased integers from `SecureRandom`
 
@@ -53,30 +53,11 @@
 
 ---
 
-## Development version
-
-This branch prepares unreleased v0.0.22, the repository's first version.
-It is not on Maven Central yet; build it from a checkout until it ships
-with the suite's first lockstep release.
-
----
-
 ## Install
 
 ### As a Java library
 
-Nothing is published yet. The proposed coordinates are
-`com.jspassgen:jspassgen`; the `com.jspassgen` namespace needs DNS
-verification of jspassgen.com at Sonatype Central before the first
-publication. Until then, build it into your local Maven repository:
-
-```bash
-git clone https://github.com/sebastienrousseau/jspassgen-sdk-java.git
-cd jspassgen-sdk-java
-./mvnw -B install
-```
-
-Then depend on it from there:
+The library is on Maven Central as `com.jspassgen:jspassgen`:
 
 ```xml
 <dependency>
@@ -86,8 +67,9 @@ Then depend on it from there:
 </dependency>
 ```
 
-There are no pre-built jars, GitHub releases or distribution packages
-yet.
+This version holds the random source; the generators come in a later
+version. Each GitHub release carries the jars and `SHA256SUMS`; there
+are no distribution packages.
 
 ---
 
@@ -155,10 +137,11 @@ conformance kit as its generators land.
 | [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
 | [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
 
-Only `@sebastienrousseau/jspassgen` is on a package registry so far
-(0.0.21 on npm). The table gives each member's purpose; the other members
-are early, each README's Capabilities at a glance says what works today,
-and they first publish with the suite's first lockstep release.
+Every member ships at 0.0.22, the suite's first lockstep release: the
+core, CLI, MCP and LSP servers on npm, the Python, Rust, Java and .NET
+SDKs on PyPI, crates.io, Maven Central and NuGet, and the C++ SDK and
+the site as GitHub releases. The table gives each member's purpose, and
+each README's Capabilities at a glance says what works today.
 
 ---
 
@@ -169,7 +152,7 @@ and they first publish with the suite's first lockstep release.
 | Randomness | `RandomSource` port and `SecureRandomSource` (bytes, unbiased integers by rejection sampling) | Available in 0.0.22 |
 | Generators | Password types from jspassgen's `PASSWORD_TYPES`, validation, entropy, error codes | Not ported yet |
 | Conformance | jspassgen's conformance kit (draw vectors, errors, wordlists) replayed in CI | Not wired yet: the kit is in jspassgen, but this port has no generator to replay it against |
-| Distribution | Maven Central, GitHub releases | Not published |
+| Distribution | Maven Central, GitHub releases | Released in 0.0.22 |
 
 ---
 
@@ -236,7 +219,6 @@ surface.
 - You need to generate passwords or passphrases today: this version has
   no generator. Use [jspassgen](https://github.com/sebastienrousseau/jspassgen)
   on Node.js, or `SecureRandom` directly.
-- You need an artifact from Maven Central: nothing is published.
 - You need output that matches jspassgen byte for byte: that is the goal,
   but it is not proven until a ported generator passes the conformance
   kit.

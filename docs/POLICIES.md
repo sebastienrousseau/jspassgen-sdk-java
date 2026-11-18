@@ -32,8 +32,7 @@
 
 ## Publication
 
-- Nothing is published. The proposed Maven coordinates are
-  `com.jspassgen:jspassgen`.
+- Published to Maven Central as `com.jspassgen:jspassgen` from 0.0.22.
 - The `com.jspassgen` namespace must be verified at Sonatype Central by
   a DNS record on jspassgen.com before the first publication, which the
   maintainer performs.
