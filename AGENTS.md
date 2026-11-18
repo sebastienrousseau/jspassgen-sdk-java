@@ -9,8 +9,9 @@ password types, validation, entropy and error codes, generated inside
 the JVM from `SecureRandom`, never over a network. It is a member of the
 jspassgen suite ([ADR 0001](https://github.com/sebastienrousseau/jspassgen/blob/main/docs/adr/0001-ecosystem-lockstep.md)).
 Today it holds only the random port (`RandomSource`) and its
-`SecureRandom` implementation; generators are ported once jspassgen's
-conformance kit exists. These are the rules an automated change is most
+`SecureRandom` implementation; no generator is ported yet, so
+jspassgen's conformance kit (shipped in jspassgen 0.0.21) is not
+replayed here. These are the rules an automated change is most
 likely to break; humans follow them too. Read
 [CONTRIBUTING.md](CONTRIBUTING.md) first.
 

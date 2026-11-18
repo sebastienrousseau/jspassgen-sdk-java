@@ -31,8 +31,9 @@ version. Nothing is published.
 
 ### Not included
 
-- Generators, validation and entropy: they are ported once jspassgen's
-  conformance kit exists.
+- Generators, validation and entropy: jspassgen's conformance kit
+  shipped in jspassgen 0.0.21, but no generator is ported here yet, so
+  the kit is not replayed.
 - `conformance/`, `ci/core.ref`, examples, benchmarks, fuzz targets, the
   demo, the rendered manual and the release workflow.
 - Publication to Maven Central: the `com.jspassgen` namespace is not
