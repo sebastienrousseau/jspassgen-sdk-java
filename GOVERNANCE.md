@@ -41,7 +41,7 @@ Items marked **Not yet arranged** have no continuity arrangement today.
 | :--- | :--- | :--- |
 | Source code | Apache-2.0 OR MIT, public history | Anyone can fork and continue it. |
 | GitHub repository | Owned by the maintainer's account | **Not yet arranged:** no second owner. |
-| Maven Central namespace `com.jspassgen` | Not yet verified (needs DNS verification of jspassgen.com) | **Not yet arranged.** |
+| Maven Central namespace `com.jspassgen` | Verified on the Central Portal through a DNS TXT record on jspassgen.com, held by the maintainer's account | **Not yet arranged:** no second account can publish. |
 | Release process | `release.yml` on a signed tag, publication gated on the `maven-central` environment; [DEVELOPMENT.md](DEVELOPMENT.md#release-model) | **Not yet arranged.** |
 
 ## Conduct and security
