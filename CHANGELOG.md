@@ -28,6 +28,15 @@ version. Nothing is published.
   complexity ceilings, `make check`), CI on Java 17 and 21, CodeQL,
   DCO, docs lint, OSV-Scanner audit, OpenSSF Scorecard, Dependabot and
   the community and policy documents.
+- The release workflow (`.github/workflows/release.yml`): on a signed
+  annotated `v<version>` tag it checks the tag
+  (`scripts/verify-release-tag`), runs `make check` and `make audit`,
+  builds the jar, sources and Javadoc jars with `SHA256SUMS`, publishes
+  them GPG-signed to Maven Central through the Central Portal after a
+  maintainer approves the `maven-central` environment, and drafts the
+  GitHub release. The `release` Maven profile and
+  `make release-dry-run` hold the publication build; normal builds are
+  unchanged.
 
 ### Not included
 
@@ -35,6 +44,6 @@ version. Nothing is published.
   shipped in jspassgen 0.0.21, but no generator is ported here yet, so
   the kit is not replayed.
 - `conformance/`, `ci/core.ref`, examples, benchmarks, fuzz targets, the
-  demo, the rendered manual and the release workflow.
+  demo and the rendered manual.
 - Publication to Maven Central: the `com.jspassgen` namespace is not
   verified yet.

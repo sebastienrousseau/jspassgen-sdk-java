@@ -168,6 +168,21 @@
           <artifactId>cyclonedx-maven-plugin</artifactId>
           <version>2.9.3</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>3.2.8</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.central</groupId>
+          <artifactId>central-publishing-maven-plugin</artifactId>
+          <version>0.12.0</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -285,4 +300,86 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <!-- Maven Central publication, used only by the release workflow
+           and `make release-dry-run`: sources and Javadoc jars, GPG
+           signatures and the Central Portal upload. Without -Prelease
+           the build is unchanged and needs no GPG key. The Portal token
+           comes from the `central` server in settings.xml, which the
+           workflow writes from the `maven-central` environment's
+           secrets. -->
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <!-- Replaces maven-deploy-plugin. ignorePublishedComponents
+                 makes a re-run safe once the version is on Central. A dry
+                 run sets central.skipUpload, so the bundle is built in
+                 target/central-publishing/ and nothing is sent, and uses
+                 ci/dry-run-settings.xml, whose `central` server has
+                 placeholder credentials. -->
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <publishingServerId>central</publishingServerId>
+              <autoPublish>true</autoPublish>
+              <waitUntil>published</waitUntil>
+              <ignorePublishedComponents>${central.ignorePublished}</ignorePublishedComponents>
+              <skipUpload>${central.skipUpload}</skipUpload>
+              <deploymentName>jspassgen-sdk-java ${project.version}</deploymentName>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <central.skipUpload>false</central.skipUpload>
+        <central.ignorePublished>true</central.ignorePublished>
+      </properties>
+    </profile>
+  </profiles>
 </project>

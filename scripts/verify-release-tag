@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+#
+# Fails unless a release tag is fit to publish. Run by the release
+# workflow's check job, and by hand before pushing a tag.
+#
+#   scripts/verify-release-tag v0.0.22            # the tag must be on HEAD
+#   scripts/verify-release-tag v0.0.22 <commit>   # the tag must be on <commit>
+#
+# The tag must be annotated and signed, named v<version> for the version
+# in pom.xml, carry exactly the message `jspassgen-sdk-java v<version>`,
+# and point at the expected commit; then every file must state that
+# version (scripts/verify-release-versions). This checks that a
+# signature is present, not that it is valid: CI has no maintainer
+# keys. Verify it with `git verify-tag` (KEYS.asc) before pushing.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+project=jspassgen-sdk-java
+tag=${1:?usage: scripts/verify-release-tag <tag> [<commit>]}
+want_commit=$(git rev-parse --verify "${2:-HEAD}^{commit}")
+
+fail() {
+  echo "verify-release-tag: $1" >&2
+  exit 1
+}
+
+version=$(awk '/<artifactId>jspassgen<\/artifactId>/ {found = 1; next}
+  found && /<version>/ {gsub(/.*<version>|<\/version>.*/, ""); print; exit}' pom.xml)
+
+[ "$tag" = "v${version}" ] || fail "tag ${tag} does not match pom.xml version ${version}"
+git rev-parse --verify --quiet "refs/tags/${tag}" > /dev/null || fail "no tag ${tag}"
+[ "$(git cat-file -t "refs/tags/${tag}")" = tag ] || fail "${tag} is not an annotated tag"
+
+subject=$(git tag -l --format='%(contents:subject)' "$tag")
+body=$(git tag -l --format='%(contents:body)' "$tag")
+if [ "$subject" != "${project} v${version}" ] || [ -n "$body" ]; then
+  fail "tag message is '${subject}${body:+ ...}', expected exactly '${project} v${version}'"
+fi
+
+[ -n "$(git tag -l --format='%(contents:signature)' "$tag")" ] || fail "${tag} is not signed"
+
+tag_commit=$(git rev-parse "refs/tags/${tag}^{commit}")
+[ "$tag_commit" = "$want_commit" ] || fail "${tag} points at ${tag_commit}, expected ${want_commit}"
+
+scripts/verify-release-versions "$version"
+echo "verify-release-tag: ${tag} is a signed annotated tag on ${want_commit}"
