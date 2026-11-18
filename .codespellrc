@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Spelling check for the docs-lint job (`make docs-lint`). Generated and
+# vendored files are skipped.
+[codespell]
+skip = ./target,./.git,./.mvn,./LICENSES,./KEYS.asc

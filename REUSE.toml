@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+#
+# Machine-readable licensing, per the REUSE specification; `reuse lint`
+# runs in the docs-lint job. Source files carry an SPDX-License-Identifier
+# header; this file adds the copyright line to every file, and the
+# licence to the files that cannot hold a comment (checksum lists, the
+# Maven wrapper properties).
+version = 1
+SPDX-PackageName = "jspassgen-sdk-java"
+SPDX-PackageSupplier = "Sebastien Rousseau"
+SPDX-PackageDownloadLocation = "https://github.com/sebastienrousseau/jspassgen-sdk-java"
+
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Sebastien Rousseau"
+SPDX-License-Identifier = "Apache-2.0 OR MIT"

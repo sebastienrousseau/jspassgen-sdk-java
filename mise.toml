@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Local toolchain: JDK 21 runs the build, which targets Java 17
+# (maven.compiler.release). Maven itself comes from ./mvnw.
+[tools]
+java = "21"

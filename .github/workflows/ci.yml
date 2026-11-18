@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+#
+# Lint, build, unit tests and the 100 % coverage gate on Java 17 and 21.
+# Maven comes from ./mvnw (SHA-256 checked) and every artifact it
+# resolves must match .mvn/checksums/. The conformance job (the
+# jspassgen kit replayed through this port) is added once the kit
+# exists in jspassgen.
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/*"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Every file states the same version
+        run: scripts/verify-release-versions
+
+      - name: Whitespace format, line length and file size
+        run: make format-check size
+
+      - name: javac -Xlint:all -Werror and PMD complexity ceilings
+        run: make lint
+
+  test:
+    name: Build, unit tests and coverage (Java ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ["17", "21"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+
+      - name: Every local gate (JaCoCo fails below 100 % line and branch)
+        run: make check
+
+      - name: Coverage report
+        if: always() && matrix.java == '21'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+          if-no-files-found: ignore
+          retention-days: 7

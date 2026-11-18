@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+cff-version: 1.2.0
+message: "If you use jspassgen-sdk-java in research or production write-ups, please cite it as below."
+type: software
+title: "jspassgen-sdk-java: a native Java port of the jspassgen core"
+abstract: >-
+  A planned native Java port of the jspassgen password and passphrase
+  core, drawing randomness only from SecureRandom, to be proven against
+  jspassgen by its conformance kit. Version 0.0.22 holds the random
+  source only; the generators are not ported yet.
+authors:
+  - family-names: Rousseau
+    given-names: Sebastien
+version: "0.0.22"
+license:
+  - Apache-2.0
+  - MIT
+repository-code: "https://github.com/sebastienrousseau/jspassgen-sdk-java"
+url: "https://jspassgen.com"
+keywords:
+  - password
+  - passphrase
+  - CSPRNG
+  - SecureRandom
+  - Java
+  - SDK
