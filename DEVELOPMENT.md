@@ -27,7 +27,8 @@ pull-request etiquette.
 | CodeQL, Scorecard, DCO | (GitHub only) | Static analysis, supply-chain posture, `Signed-off-by` on every commit |
 
 Not present yet, because they would have nothing to run: a conformance
-job (the kit does not exist), a fuzz workflow (no parser or generator to
+job (the kit ships in jspassgen 0.0.21, but no generator is ported here
+to run it), a fuzz workflow (no parser or generator to
 fuzz), a docs deployment (no rendered manual) and a release workflow
 (nothing to publish until the namespace is verified).
 
