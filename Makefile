@@ -72,7 +72,9 @@ docs-lint: ## markdownlint, codespell, REUSE and lychee (offline) over the docs
 	lychee --offline --no-progress --include-fragments --exclude-path target '**/*.md'
 
 release-dry-run: ## The release build (jar, sources and Javadoc jars, Central bundle), signed with GPG_KEYNAME if set, not published
-	$(MVN) -B -Prelease deploy $(DRY_RUN_FLAGS) \
+	# clean first: pages left in target/ by `make javadoc` would end up in
+	# the Javadoc jar, which then differs from the publish job's clean build.
+	$(MVN) -B -Prelease clean deploy $(DRY_RUN_FLAGS) \
 	  $(if $(GPG_KEYNAME),-Dgpg.keyname=$(GPG_KEYNAME),-Dgpg.skip=true)
 
 lock: ## Re-record .mvn/checksums from a clean local repository, release profile included
