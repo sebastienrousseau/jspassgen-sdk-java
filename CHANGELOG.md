@@ -37,6 +37,13 @@ The repository's first version, at the first jspassgen suite version.
   `make release-dry-run` hold the publication build; normal builds are
   unchanged.
 
+### Fixed
+
+- `make release-dry-run` starts from a clean `target/`. After
+  `make check`, stale Javadoc pages were packed into the Javadoc jar,
+  so the release run's checksums did not match the publish job's
+  rebuild and the first `v0.0.22` run stopped before uploading.
+
 ### Not included
 
 - Generators, validation and entropy: jspassgen's conformance kit
