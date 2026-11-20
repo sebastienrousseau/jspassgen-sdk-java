@@ -29,8 +29,9 @@ pull-request etiquette.
 
 Not present yet, because they would have nothing to run: a conformance
 job (the kit ships in jspassgen 0.0.21, but no generator is ported here
-to run it), a fuzz workflow (no parser or generator to
-fuzz) and a docs deployment (no rendered manual).
+to run it) and a docs deployment (no rendered manual). The Jazzer fuzz
+tests need no job of their own: every `mvn test`, so every CI test
+job, replays their committed inputs ([Fuzzing](#fuzzing)).
 
 ## Tests
 
@@ -38,6 +39,25 @@ fuzz) and a docs deployment (no rendered manual).
 | :--- | :--- |
 | `SecureRandomSourceTest` | Range and error cases, exact draws through `ScriptedRandom`, the rejection path, chi-squared uniformity (p = 1e-6) and a modulo-bias check |
 | `ScriptedRandom` | A `SecureRandom` that returns scripted bytes, for exact draws |
+| `SecureRandomSourceFuzzTest` | Jazzer `@FuzzTest`s: `randomInt` is rejection sampling over the fuzzer's draws (in range, every rejected draw at or above the limit, the result the accepted draw modulo `max`); `bytes` returns exactly the drawn bytes; both reject bounds below 1 without drawing |
+| `FuzzedRandom` | A `SecureRandom` that returns the fuzzer's bytes (zeros once they run out) and records them |
+
+### Fuzzing
+
+The fuzz tests use [Jazzer](https://github.com/CodeIntelligenceTesting/jazzer)'s
+JUnit integration. In a plain `mvn test` (regression mode) each
+`@FuzzTest` runs once on an empty input and once on each file under
+`src/test/resources/com/jspassgen/SecureRandomSourceFuzzTestInputs/<method>/`.
+To fuzz one method, set `JAZZER_FUZZ=1` and select it:
+
+```sh
+JAZZER_FUZZ=1 JAZZER_MAX_DURATION=60s ./mvnw -B test \
+  -Dtest='SecureRandomSourceFuzzTest#randomIntIsRejectionSampling' -Djacoco.skip=true
+```
+
+The generated corpus goes to `.cifuzz-corpus/` (ignored by git). A
+crashing input is written next to the committed ones; fix the cause and
+commit the input, so it is replayed from then on.
 
 ### Coverage and complexity
 

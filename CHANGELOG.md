@@ -16,6 +16,16 @@ In lockstep with the jspassgen suite's 0.0.23.
 
 - `.github/CODEOWNERS`: the maintainer owns every file, so the main
   ruleset's required review has a code owner to request.
+- Jazzer fuzz tests (`SecureRandomSourceFuzzTest`, test scope
+  `com.code-intelligence:jazzer-junit` 0.30.0): with the argument and
+  every random byte chosen by the fuzzer, `randomInt` stays in
+  `[0, max)`, redraws exactly the draws at or above the largest
+  multiple of `max` below 2^32 and returns the accepted draw modulo
+  `max`; `bytes(n)` returns exactly the `n` drawn bytes; both reject a
+  bound below 1 before drawing. Every `mvn test` replays the committed
+  inputs, so CI runs them on Java 17 and 21; `JAZZER_FUZZ=1` fuzzes
+  (`DEVELOPMENT.md`). This is the Jazzer integration OpenSSF Scorecard's
+  Fuzzing check recognises for Java.
 
 ### Changed
 
