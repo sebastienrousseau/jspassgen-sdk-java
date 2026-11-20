@@ -137,7 +137,7 @@ conformance kit as its generators land.
 | [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
 | [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
 
-Every member ships at 0.0.22, the suite's first lockstep release: the
+Every member ships at 0.0.23, the suite's second lockstep release: the
 core, CLI, MCP and LSP servers on npm, the Python, Rust, Java and .NET
 SDKs on PyPI, crates.io, Maven Central and NuGet, and the C++ SDK and
 the site as GitHub releases. The table gives each member's purpose, and
@@ -149,10 +149,10 @@ each README's Capabilities at a glance says what works today.
 
 | Area | Capability | Status |
 | :--- | :--- | :--- |
-| Randomness | `RandomSource` port and `SecureRandomSource` (bytes, unbiased integers by rejection sampling) | Available in 0.0.22 |
+| Randomness | `RandomSource` port and `SecureRandomSource` (bytes, unbiased integers by rejection sampling) | Available in 0.0.23 (first published in 0.0.22) |
 | Generators | Password types from jspassgen's `PASSWORD_TYPES`, validation, entropy, error codes | Not ported yet |
 | Conformance | jspassgen's conformance kit (draw vectors, errors, wordlists) replayed in CI | Not wired yet: the kit is in jspassgen, but this port has no generator to replay it against |
-| Distribution | Maven Central, GitHub releases | Released in 0.0.22 |
+| Distribution | Maven Central, GitHub releases | Released in 0.0.23 (first published in 0.0.22) |
 
 ---
 
