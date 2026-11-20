@@ -12,6 +12,11 @@ each release moves by `0.0.1`, in lockstep with the suite.
 
 In lockstep with the jspassgen suite's 0.0.23.
 
+### Added
+
+- `.github/CODEOWNERS`: the maintainer owns every file, so the main
+  ruleset's required review has a code owner to request.
+
 ### Changed
 
 - The version is 0.0.23 in `pom.xml`, `Jspassgen.VERSION`,
