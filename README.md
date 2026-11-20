@@ -7,7 +7,7 @@
 <h1 align="center">jspassgen-sdk-java</h1>
 
 <p align="center">
-  A native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.22 holds the random source, and the generators are not ported yet.
+  A native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.23 holds the random source, and the generators are not ported yet.
 </p>
 
 <p align="center">
@@ -63,7 +63,7 @@ The library is on Maven Central as `com.jspassgen:jspassgen`:
 <dependency>
   <groupId>com.jspassgen</groupId>
   <artifactId>jspassgen</artifactId>
-  <version>0.0.22</version>
+  <version>0.0.23</version>
 </dependency>
 ```
 
@@ -137,7 +137,7 @@ conformance kit as its generators land.
 | [`jspassgen-sdk-cpp`](https://github.com/sebastienrousseau/jspassgen-sdk-cpp) | Native C++17 port on the OS CSPRNG | C++ programs |
 | [`jspassgen.github.io`](https://github.com/sebastienrousseau/jspassgen.github.io) | Source of [jspassgen.com](https://jspassgen.com) | Evaluating the suite |
 
-Every member ships at 0.0.22, the suite's first lockstep release: the
+Every member ships at 0.0.23, the suite's second lockstep release: the
 core, CLI, MCP and LSP servers on npm, the Python, Rust, Java and .NET
 SDKs on PyPI, crates.io, Maven Central and NuGet, and the C++ SDK and
 the site as GitHub releases. The table gives each member's purpose, and
@@ -149,10 +149,10 @@ each README's Capabilities at a glance says what works today.
 
 | Area | Capability | Status |
 | :--- | :--- | :--- |
-| Randomness | `RandomSource` port and `SecureRandomSource` (bytes, unbiased integers by rejection sampling) | Available in 0.0.22 |
+| Randomness | `RandomSource` port and `SecureRandomSource` (bytes, unbiased integers by rejection sampling) | Available in 0.0.23 (first published in 0.0.22) |
 | Generators | Password types from jspassgen's `PASSWORD_TYPES`, validation, entropy, error codes | Not ported yet |
 | Conformance | jspassgen's conformance kit (draw vectors, errors, wordlists) replayed in CI | Not wired yet: the kit is in jspassgen, but this port has no generator to replay it against |
-| Distribution | Maven Central, GitHub releases | Released in 0.0.22 |
+| Distribution | Maven Central, GitHub releases | Released in 0.0.23 (first published in 0.0.22) |
 
 ---
 
@@ -187,7 +187,7 @@ no measurement has been made, and the repository has no benchmark target.
   `randomInt` draws 32 bits and rejects values at or above the largest
   multiple of `max` below 2<sup>32</sup>, so every result is equally
   likely.
-- `com.jspassgen.Jspassgen.VERSION`: the library version, `0.0.22`.
+- `com.jspassgen.Jspassgen.VERSION`: the library version, `0.0.23`.
 
 ---
 

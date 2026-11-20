@@ -9,7 +9,8 @@ older `0.0.x` versions do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| 0.0.22 | Latest release | Yes |
+| 0.0.23 | Latest release | Yes |
+| 0.0.22 | Superseded by 0.0.23 | No |
 
 ## Reporting a vulnerability
 

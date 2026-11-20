@@ -8,6 +8,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to the jspassgen suite's `0.0.x` versioning:
 each release moves by `0.0.1`, in lockstep with the suite.
 
+## [0.0.23] - 2026-11-20
+
+In lockstep with the jspassgen suite's 0.0.23.
+
+### Added
+
+- `.github/CODEOWNERS`: the maintainer owns every file, so the main
+  ruleset's required review has a code owner to request.
+- Jazzer fuzz tests (`SecureRandomSourceFuzzTest`, test scope
+  `com.code-intelligence:jazzer-junit` 0.30.0): with the argument and
+  every random byte chosen by the fuzzer, `randomInt` stays in
+  `[0, max)`, redraws exactly the draws at or above the largest
+  multiple of `max` below 2^32 and returns the accepted draw modulo
+  `max`; `bytes(n)` returns exactly the `n` drawn bytes; both reject a
+  bound below 1 before drawing. Every `mvn test` replays the committed
+  inputs, so CI runs them on Java 17 and 21; `JAZZER_FUZZ=1` fuzzes
+  (`DEVELOPMENT.md`). This is the Jazzer integration OpenSSF Scorecard's
+  Fuzzing check recognises for Java.
+
+### Changed
+
+- The version is 0.0.23 in `pom.xml`, `Jspassgen.VERSION`,
+  `CITATION.cff`, the README install snippet and the `SECURITY.md` and
+  `SUPPORT.md` support tables. The library's behaviour is unchanged.
+
 ## [0.0.22] - 2026-11-18
 
 The repository's first version, at the first jspassgen suite version.

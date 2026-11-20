@@ -1,5 +1,7 @@
 # Maven build output
 target/
+# Jazzer's generated corpus from JAZZER_FUZZ=1 runs
+.cifuzz-corpus/
 # IDE and OS files
 .idea/
 *.iml
