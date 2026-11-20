@@ -7,7 +7,7 @@
 <h1 align="center">jspassgen-sdk-java</h1>
 
 <p align="center">
-  A native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.22 holds the random source, and the generators are not ported yet.
+  A native Java port of the jspassgen password and passphrase core, drawing randomness only from <code>SecureRandom</code>; version 0.0.23 holds the random source, and the generators are not ported yet.
 </p>
 
 <p align="center">
@@ -63,7 +63,7 @@ The library is on Maven Central as `com.jspassgen:jspassgen`:
 <dependency>
   <groupId>com.jspassgen</groupId>
   <artifactId>jspassgen</artifactId>
-  <version>0.0.22</version>
+  <version>0.0.23</version>
 </dependency>
 ```
 
@@ -187,7 +187,7 @@ no measurement has been made, and the repository has no benchmark target.
   `randomInt` draws 32 bits and rejects values at or above the largest
   multiple of `max` below 2<sup>32</sup>, so every result is equally
   likely.
-- `com.jspassgen.Jspassgen.VERSION`: the library version, `0.0.22`.
+- `com.jspassgen.Jspassgen.VERSION`: the library version, `0.0.23`.
 
 ---
 

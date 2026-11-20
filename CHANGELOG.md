@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to the jspassgen suite's `0.0.x` versioning:
 each release moves by `0.0.1`, in lockstep with the suite.
 
+## [0.0.23] - Unreleased
+
+In lockstep with the jspassgen suite's 0.0.23.
+
+### Changed
+
+- The version is 0.0.23 in `pom.xml`, `Jspassgen.VERSION`,
+  `CITATION.cff`, the README install snippet and the `SECURITY.md` and
+  `SUPPORT.md` support tables. The library's behaviour is unchanged.
+
 ## [0.0.22] - 2026-11-18
 
 The repository's first version, at the first jspassgen suite version.

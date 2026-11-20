@@ -23,7 +23,7 @@ Do not open a public issue. Follow [SECURITY.md](SECURITY.md).
 
 | Version | Supported | Notes |
 | :--- | :--- | :--- |
-| 0.0.22 | Yes | Latest release; random source only |
+| 0.0.23 | Yes | Latest release; random source only |
 
 Only the latest `0.0.x` gets fixes while the project is pre-1.0. Support
 is best effort by a single maintainer ([GOVERNANCE.md](GOVERNANCE.md)).
