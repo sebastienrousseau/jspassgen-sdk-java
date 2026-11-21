@@ -10,7 +10,7 @@
        Central. -->
   <groupId>com.jspassgen</groupId>
   <artifactId>jspassgen</artifactId>
-  <version>0.0.23</version>
+  <version>0.0.24</version>
   <packaging>jar</packaging>
 
   <name>jspassgen</name>
@@ -55,7 +55,7 @@
     <jazzer.version>0.30.0</jazzer.version>
     <!-- JaCoCo's prepare-agent sets argLine; empty when it is skipped. -->
     <argLine></argLine>
-    <project.build.outputTimestamp>2026-11-20T00:00:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-11-21T00:00:00Z</project.build.outputTimestamp>
   </properties>
 
   <dependencyManagement>

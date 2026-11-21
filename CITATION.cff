@@ -6,13 +6,13 @@ title: "jspassgen-sdk-java: a native Java port of the jspassgen core"
 abstract: >-
   A native Java port of the jspassgen password and passphrase
   core, drawing randomness only from SecureRandom, to be proven against
-  jspassgen by its conformance kit. Version 0.0.23 holds the random
+  jspassgen by its conformance kit. Version 0.0.24 holds the random
   source only; the generators are not ported yet.
 authors:
   - family-names: Rousseau
     given-names: Sebastien
-version: "0.0.23"
-date-released: "2026-11-20"
+version: "0.0.24"
+date-released: "2026-11-21"
 license:
   - Apache-2.0
   - MIT

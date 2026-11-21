@@ -5,7 +5,7 @@ package com.jspassgen;
 public final class Jspassgen {
 
   /** The library version, the same as the jspassgen suite version. */
-  public static final String VERSION = "0.0.23";
+  public static final String VERSION = "0.0.24";
 
   private Jspassgen() {
   }

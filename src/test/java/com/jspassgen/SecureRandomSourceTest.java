@@ -19,7 +19,7 @@ class SecureRandomSourceTest {
 
   @Test
   void versionIsTheSuiteVersion() {
-    assertEquals("0.0.23", Jspassgen.VERSION);
+    assertEquals("0.0.24", Jspassgen.VERSION);
   }
 
   @ParameterizedTest

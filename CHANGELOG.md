@@ -8,7 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to the jspassgen suite's `0.0.x` versioning:
 each release moves by `0.0.1`, in lockstep with the suite.
 
-## [0.0.24] - Unreleased
+## [0.0.24] - 2026-11-21
+
+In lockstep with the jspassgen suite's 0.0.24.
 
 ### Added
 
@@ -19,6 +21,12 @@ each release moves by `0.0.1`, in lockstep with the suite.
   `jspassgen-sdk-java-<version>.intoto.jsonl`. Check a download with
   `gh attestation verify <file> --repo sebastienrousseau/jspassgen-sdk-java`.
   This answers the OpenSSF Scorecard Signed-Releases check.
+
+### Changed
+
+- The version is 0.0.24 in `pom.xml`, `Jspassgen.VERSION`,
+  `CITATION.cff`, the README install snippet and the `SECURITY.md` and
+  `SUPPORT.md` support tables. The library's behaviour is unchanged.
 
 ## [0.0.23] - 2026-11-20
 
