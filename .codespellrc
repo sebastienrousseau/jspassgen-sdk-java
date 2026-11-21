@@ -3,3 +3,6 @@
 # vendored files are skipped, and so are the binary fuzz inputs.
 [codespell]
 skip = ./target,./.git,./.mvn,./LICENSES,./KEYS.asc,./src/test/resources/com/jspassgen/SecureRandomSourceFuzzTestInputs
+# `intoto` is the in-toto attestation extension (.intoto.jsonl) the
+# release's provenance bundle must carry, not a misspelling of "into".
+ignore-words-list = intoto
