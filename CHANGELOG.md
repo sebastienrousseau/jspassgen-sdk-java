@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to the jspassgen suite's `0.0.x` versioning:
 each release moves by `0.0.1`, in lockstep with the suite.
 
+## [0.0.24] - Unreleased
+
+### Added
+
+- Releases carry their SLSA build provenance. The release workflow
+  attests every release file with `actions/attest-build-provenance`,
+  signed through Sigstore and stored as a GitHub attestation, and
+  attaches the bundle, listed in the release checksums, as
+  `jspassgen-sdk-java-<version>.intoto.jsonl`. Check a download with
+  `gh attestation verify <file> --repo sebastienrousseau/jspassgen-sdk-java`.
+  This answers the OpenSSF Scorecard Signed-Releases check.
+
 ## [0.0.23] - 2026-11-20
 
 In lockstep with the jspassgen suite's 0.0.23.
