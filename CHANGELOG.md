@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to the jspassgen suite's `0.0.x` versioning:
 each release moves by `0.0.1`, in lockstep with the suite.
 
+## [0.0.25] - Unreleased
+
+### Fixed
+
+- The release notes' checksums list `SHA256SUMS` itself, so every
+  asset attached to a release has its SHA-256 in the notes. The 0.0.23
+  and 0.0.24 notes omitted it; the 0.0.24 notes were corrected.
+
 ## [0.0.24] - 2026-11-21
 
 In lockstep with the jspassgen suite's 0.0.24.
